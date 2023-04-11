@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhaileye <mhaileye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/04 18:31:38 by mhaileye          #+#    #+#             */
-/*   Updated: 2023/04/04 19:57:50 by mhaileye         ###   ########.fr       */
+/*   Created: 2023/04/09 17:30:43 by mhaileye          #+#    #+#             */
+/*   Updated: 2023/04/10 21:11:52 by mhaileye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	move_lowest_cost(t_Stack **a, t_Stack **b, int cost_a, int cost_b)
 		cost_a--;
 		cost_b--;
 	}
-	while (cost_a < 0 && cost_a < 0)
+	while (cost_a < 0 && cost_b < 0)
 	{
 		r_rotate_all(a, b);
 		cost_a++;

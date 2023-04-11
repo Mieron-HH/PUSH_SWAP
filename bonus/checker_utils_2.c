@@ -1,33 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utilities_3.c                                      :+:      :+:    :+:   */
+/*   checker_utils_2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhaileye <mhaileye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/09 17:31:54 by mhaileye          #+#    #+#             */
-/*   Updated: 2023/04/09 17:31:54 by mhaileye         ###   ########.fr       */
+/*   Created: 2023/04/09 21:42:54 by mhaileye          #+#    #+#             */
+/*   Updated: 2023/04/10 20:42:24 by mhaileye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	"push_swap.h"
+#include	"checker.h"
 
-int	get_mid_point(t_Stack *stack)
+int	has_duplicate(struct t_Stack *stack)
 {
-	int		sum;
-	int		size;
+	t_Stack	*tmp;
+	t_Stack	*head;
+	t_Stack	*last;
 
-	sum = 0;
-	size = 0;
+	head = init_node(ft_itoa(stack->num));
+	if (!head)
+		return (-1);
+	last = head;
+	stack = stack->next;
 	while (stack)
 	{
-		size++;
-		sum += stack->index;
+		tmp = head;
+		while (tmp && tmp->num != stack->num)
+			tmp = tmp->next;
+		if (tmp && tmp->num == stack->num)
+			return (free_stack(&head) * 0 + 1);
+		last->next = init_node(ft_itoa(stack->num));
+		last = last->next;
 		stack = stack->next;
 	}
-	if (sum % size == 0)
-		return (sum / size);
-	return (sum / size + 1);
+	return (free_stack(&head) * 0);
 }
 
 t_Stack	*get_tail(t_Stack *stack)
@@ -56,12 +63,25 @@ void	print_stack(t_Stack *stack)
 {
 	if (stack != NULL)
 	{
-		ft_printf("|||");
+		ft_printf("|||   ");
 		while (stack)
 		{
-			ft_printf("%d ", stack->num);
+			ft_printf("%d   ", stack->num);
 			stack = stack->next;
 		}
 		ft_printf("|||\n");
 	}
+}
+
+int	free_stack(t_Stack **stack)
+{
+	t_Stack	*tmp;
+
+	while (*stack != NULL)
+	{
+		tmp = (*stack)->next;
+		free(*stack);
+		*stack = tmp;
+	}
+	return (1);
 }

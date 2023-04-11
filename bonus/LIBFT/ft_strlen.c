@@ -1,24 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_validate_type.c                                 :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhaileye <mhaileye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/23 16:21:55 by mhaileye          #+#    #+#             */
-/*   Updated: 2023/01/23 16:21:55 by mhaileye         ###   ########.fr       */
+/*   Created: 2023/01/10 11:19:33 by mhaileye          #+#    #+#             */
+/*   Updated: 2023/01/17 18:29:39 by mhaileye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	"ft_printf.h"
+#include	"libft.h"
 
-int	ft_validate(va_list args, char type)
+size_t	ft_strlen(const char *s)
 {
-	if (type == '\0')
-		return (0);
-	if (type == 'd' || type == 'i')
-		return (ft_putnbr(va_arg(args, int)));
-	if (type == 'E')
-		return (ft_puterr(va_arg(args, char const *)));
-	return (0);
+	size_t	len;
+
+	len = 0;
+	while (s[len] != '\0')
+		len++;
+	return (len);
 }
+
+// int main () {
+// 	char str[50];
+// 	int len;
+
+// 	strcpy(str, "This is tutorialspoint.com");
+
+// 	len = ft_strlen(str);
+// 	printf("Length of |%s| is |%d|\n", str, len);
+
+// 	return(0);
+// }

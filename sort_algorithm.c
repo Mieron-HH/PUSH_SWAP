@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhaileye <mhaileye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/04 18:31:47 by mhaileye          #+#    #+#             */
-/*   Updated: 2023/04/04 19:56:12 by mhaileye         ###   ########.fr       */
+/*   Created: 2023/04/09 17:30:36 by mhaileye          #+#    #+#             */
+/*   Updated: 2023/04/09 17:30:37 by mhaileye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	sort_stack(t_Stack **a, t_Stack **b)
 	int	size;
 
 	size = get_size(*a);
-	if (size == 2 && !is_sorted(*a, 1))
+	if (size == 2)
 		sort_two(a, 1);
 	else if (size == 3)
 		sort_three(a);

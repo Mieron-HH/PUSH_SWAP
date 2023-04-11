@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_validate_type.c                                 :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhaileye <mhaileye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/23 16:21:55 by mhaileye          #+#    #+#             */
-/*   Updated: 2023/01/23 16:21:55 by mhaileye         ###   ########.fr       */
+/*   Created: 2023/01/10 11:30:45 by mhaileye          #+#    #+#             */
+/*   Updated: 2023/01/13 22:36:34 by mhaileye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	"ft_printf.h"
+#include	"libft.h"
 
-int	ft_validate(va_list args, char type)
+void	*ft_memset(void *b, int c, size_t size)
 {
-	if (type == '\0')
-		return (0);
-	if (type == 'd' || type == 'i')
-		return (ft_putnbr(va_arg(args, int)));
-	if (type == 'E')
-		return (ft_puterr(va_arg(args, char const *)));
-	return (0);
+	size_t	i;
+
+	i = 0;
+	while (i < size)
+		((unsigned char *) b)[i++] = c;
+	return (b);
 }

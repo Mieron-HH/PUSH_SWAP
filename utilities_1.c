@@ -3,14 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   utilities_1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mhaileye <mhaileye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/30 17:22:20 by mhaileye          #+#    #+#             */
-/*   Updated: 2023/04/08 02:37:53 by marvin           ###   ########.fr       */
+/*   Created: 2023/04/09 17:31:43 by mhaileye          #+#    #+#             */
+/*   Updated: 2023/04/09 18:03:26 by mhaileye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"push_swap.h"
+
+int	has_duplicate(struct t_Stack *stack)
+{
+	t_Stack	*tmp;
+	t_Stack	*head;
+	t_Stack	*last;
+
+	head = init_node(ft_itoa(stack->num));
+	if (!head)
+		return (-1);
+	last = head;
+	stack = stack->next;
+	while (stack)
+	{
+		tmp = head;
+		while (tmp && tmp->num != stack->num)
+			tmp = tmp->next;
+		if (tmp && tmp->num == stack->num)
+			return (free_stack(&head) * 0 + 1);
+		last->next = init_node(ft_itoa(stack->num));
+		last = last->next;
+		stack = stack->next;
+	}
+	return (free_stack(&head) * 0);
+}
 
 void	assign_index(t_Stack *stack_a, int size)
 {
@@ -43,29 +68,28 @@ void	assign_index(t_Stack *stack_a, int size)
 
 void	push_until_three(t_Stack **a, t_Stack **b)
 {
-	int	mid;
-	int	head_found;
-	int	head_num;
+	int	stack_size;
+	int	pushed;
+	int	i;
 
-	while (get_size(*a) > 3)
+	stack_size = get_size(*a);
+	pushed = 0;
+	i = 0;
+	while (stack_size > 6 && i < stack_size && pushed < stack_size / 2)
 	{
-		head_found = 0;
-		head_num = 0;
-		mid = get_mid_point(*a);
-		while (!head_found && (*a)->num != head_num)
+		if ((*a)->index <= stack_size / 2)
 		{
-			if ((*a)->num >= mid)
-			{
-				if (!head_found)
-				{
-					head_found = 1;
-					head_num = (*a)->num;
-				}
-				rotate_a(a, 1);
-				continue ;
-			}
 			push_to_b(a, b, 1);
+			pushed++;
 		}
+		else
+			rotate_a(a, 1);
+		i++;
+	}
+	while (stack_size - pushed > 3)
+	{
+		push_to_b(a, b, 1);
+		pushed++;
 	}
 }
 
