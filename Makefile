@@ -35,13 +35,13 @@ all: $(NAME)
 $(NAME): $(OBJECTS)
 	cd LIBFT && make
 	cd FT_PRINTF && make
-	find . -name "*.o" | xargs $(LIBC) $(NAME)
+	find . -name "*.o" -type f -not -path "./bonus/*.o" | xargs $(LIBC) $(NAME)
 	gcc $(NAME) -o push_swap
 
 bonus: $(B_OBJECTS)
 	cd bonus/LIBFT && make
 	cd bonus/FT_PRINTF && make
-	cd bonus && find . -name "*.o" | xargs $(LIBC) $(B_NAME)
+	cd bonus && find . -type f -name "*.o" | xargs $(LIBC) $(B_NAME)
 	cd bonus && gcc $(B_NAME) -o checker
 	cd bonus && mv checker ../
 
@@ -58,11 +58,11 @@ libftFclean:
 ft_printfFclean:
 	cd FT_PRINTF && make fclean
 
-bFClean: bClean
+bfclean: bclean
 	cd bonus && rm -f $(B_NAME)
 	rm -f checker
 
-bClean:
+bclean:
 	cd bonus/LIBFT && make fclean
 	cd bonus/FT_PRINTF && make fclean
 	cd bonus/GNL && rm -f *.o
@@ -70,4 +70,6 @@ bClean:
 
 re: fclean all
 
-.PHONY: fclean clean re all
+bre: bfclean bonus
+
+.PHONY: fclean clean re all bonus

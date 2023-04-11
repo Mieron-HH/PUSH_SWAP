@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utilities_2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhaileye <mhaileye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 17:31:49 by mhaileye          #+#    #+#             */
-/*   Updated: 2023/04/10 22:26:05 by mhaileye         ###   ########.fr       */
+/*   Updated: 2023/04/11 15:42:22 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,16 +83,19 @@ int	pre_atoi(char *s, int *num)
 	else if (s[sign + i] < '0' || s[sign + i] > '9')
 		return (0);
 	*num = ft_atoi(s);
-	if (!compare_atoi(s, *num, sign, i))
+	if (!compare_atoi(s, *num, sign, i) && free_up(&s))
 		return (0);
 	return (1);
 }
 
 int	compare_atoi(char *s, int num, int sign_found, int leading_os)
 {
+	char	*itoa;
 	int	l_os_found;
+	int	joined;
 
 	l_os_found = 0;
+	joined = 0;
 	if (leading_os > 0)
 		l_os_found++;
 	leading_os++;
@@ -100,11 +103,17 @@ int	compare_atoi(char *s, int num, int sign_found, int leading_os)
 		s++;
 	while (--leading_os > 0)
 		s++;
-	if (ft_strlen(s) == 0 && l_os_found)
+	if (ft_strlen(s) == 0 && l_os_found && ++joined)
 		s = ft_strjoin("\0", "0");
-	else if (sign_found)
+	else if (sign_found && ++joined)
 		s = ft_strjoin("-", s);
-	if (ft_strncmp(ft_itoa(num), s, ft_strlen(s)) == 0)
+	itoa = ft_itoa(num);
+	if (s && ft_strncmp(itoa, s, ft_strlen(s)) == 0 && free_up(&itoa))
+	{
+		joined = joined && free_up(&s);
 		return (1);
+	}
+	joined = joined && free_up(&s);
+	free_up((void *) itoa);
 	return (0);
 }

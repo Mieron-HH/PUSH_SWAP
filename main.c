@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhaileye <mhaileye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 17:30:04 by mhaileye          #+#    #+#             */
-/*   Updated: 2023/04/10 22:26:47 by mhaileye         ###   ########.fr       */
+/*   Updated: 2023/04/11 17:12:41 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ int	main(int argc, char **argv)
 	stack_b = NULL;
 	if (!stack_a && ft_printf("%E", "Error\n"))
 		return (0);
-	if (has_duplicate(stack_a) && ft_printf("%E", "Error\n"))
+	if (has_duplicate(&stack_a) && ft_printf("%E", "Error\n"))
 		return (0);
-	if (is_sorted(stack_a, 1))
+	if (is_sorted(stack_a, 1) && free_stack(&stack_a))
 		return (0);
 	assign_index(stack_a, get_size(stack_a) + 1);
 	sort_stack(&stack_a, &stack_b);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhaileye <mhaileye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 17:30:22 by mhaileye          #+#    #+#             */
-/*   Updated: 2023/04/10 21:57:06 by mhaileye         ###   ########.fr       */
+/*   Updated: 2023/04/11 17:07:23 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@ int			extract_from_string(t_Stack **stack, char *s);
 int			extract_from_string_array(t_Stack **stack, char *s);
 int			compare_atoi(char *s, int num, int sign_found, int leading_os);
 int			abs(int num);
+int			ft_arrlen(char **str);
+int			free_up(char **str);
+int			free_array(char **arry);
 
 int			push_to_b(t_Stack **a, t_Stack **b, int print);
 int			push_to_a(t_Stack **b, t_Stack **a, int print);
@@ -59,7 +62,7 @@ void		push_until_three(t_Stack **stack_a, t_Stack **stack_b);
 void		begin_sort(t_Stack **a, t_Stack **b);
 
 int			is_sorted(t_Stack *stack, int order);
-int			has_duplicate(t_Stack *stack);
+int			has_duplicate(t_Stack **stack);
 int			pre_atoi(char *s, int *num);
 
 void		print_stack(t_Stack *stack);

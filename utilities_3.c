@@ -3,32 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utilities_3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhaileye <mhaileye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 17:31:54 by mhaileye          #+#    #+#             */
-/*   Updated: 2023/04/09 17:31:54 by mhaileye         ###   ########.fr       */
+/*   Updated: 2023/04/11 16:38:39 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"push_swap.h"
-
-int	get_mid_point(t_Stack *stack)
-{
-	int		sum;
-	int		size;
-
-	sum = 0;
-	size = 0;
-	while (stack)
-	{
-		size++;
-		sum += stack->index;
-		stack = stack->next;
-	}
-	if (sum % size == 0)
-		return (sum / size);
-	return (sum / size + 1);
-}
 
 t_Stack	*get_tail(t_Stack *stack)
 {
@@ -50,6 +32,25 @@ int	get_size(t_Stack *stack)
 		stack = stack->next;
 	}
 	return (len);
+}
+
+int	ft_arrlen(char **str)
+{
+	int len;
+
+	if (str == NULL)
+		return (0);
+	len = 0;
+	while (str[len])
+		len++;
+	return (len);
+}
+
+int	free_up(char **str)
+{
+	free((void *) *str);
+	*str = NULL;
+	return (1);
 }
 
 void	print_stack(t_Stack *stack)
