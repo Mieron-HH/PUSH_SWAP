@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 17:31:49 by mhaileye          #+#    #+#             */
-/*   Updated: 2023/04/11 15:42:22 by codespace        ###   ########.fr       */
+/*   Updated: 2023/04/11 17:44:19 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	pre_atoi(char *s, int *num)
 	else if (s[sign + i] < '0' || s[sign + i] > '9')
 		return (0);
 	*num = ft_atoi(s);
-	if (!compare_atoi(s, *num, sign, i) && free_up(&s))
+	if (!compare_atoi(s, *num, sign, i))
 		return (0);
 	return (1);
 }
