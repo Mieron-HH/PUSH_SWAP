@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker_utils_3.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhaileye <mhaileye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 22:03:13 by mhaileye          #+#    #+#             */
-/*   Updated: 2023/04/10 22:28:02 by mhaileye         ###   ########.fr       */
+/*   Updated: 2023/04/12 12:12:24 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,12 @@ int	pre_atoi(char *s, int *num)
 
 int	compare_atoi(char *s, int num, int sign_found, int leading_os)
 {
-	int	l_os_found;
+	char	*itoa;
+	int		l_os_found;
+	int		joined;
 
 	l_os_found = 0;
+	joined = 0;
 	if (leading_os > 0)
 		l_os_found++;
 	leading_os++;
@@ -62,11 +65,45 @@ int	compare_atoi(char *s, int num, int sign_found, int leading_os)
 		s++;
 	while (--leading_os > 0)
 		s++;
-	if (ft_strlen(s) == 0 && l_os_found)
+	if (ft_strlen(s) == 0 && l_os_found && ++joined)
 		s = ft_strjoin("\0", "0");
-	else if (sign_found)
+	else if (sign_found && ++joined)
 		s = ft_strjoin("-", s);
-	if (ft_strncmp(ft_itoa(num), s, ft_strlen(s)) == 0)
+	itoa = ft_itoa(num);
+	if (s && ft_strncmp(itoa, s, ft_strlen(s)) == 0 && free_up(&itoa))
+	{
+		joined = joined && free_up(&s);
 		return (1);
+	}
+	if (joined)
+		free_up(&s);
+	free_up(&itoa);
 	return (0);
+}
+
+int	ft_arrlen(char **str)
+{
+	int len;
+
+	if (str == NULL)
+		return (0);
+	len = 0;
+	while (str[len])
+		len++;
+	return (len);
+}
+
+int	free_array(char **arry)
+{
+	int	len;
+	int	i;
+
+	len = ft_arrlen(arry);
+	if (len == 0)
+		return (1);
+	i = -1;
+	while (++i < len)
+		free_up(&(arry[i]));
+	free(arry);
+	return (1);
 }

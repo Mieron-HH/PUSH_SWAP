@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 17:30:04 by mhaileye          #+#    #+#             */
-/*   Updated: 2023/04/11 17:12:41 by codespace        ###   ########.fr       */
+/*   Updated: 2023/04/12 12:33:30 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	main(int argc, char **argv)
 	if (argc == 1)
 		return (0);
 	stack_a = extract_stack(argv, 0, argc);
-	stack_b = NULL;
 	if (!stack_a && ft_printf("%E", "Error\n"))
 		return (0);
 	if (has_duplicate(&stack_a) && ft_printf("%E", "Error\n"))
@@ -28,6 +27,7 @@ int	main(int argc, char **argv)
 	if (is_sorted(stack_a, 1) && free_stack(&stack_a))
 		return (0);
 	assign_index(stack_a, get_size(stack_a) + 1);
+	stack_b = NULL;
 	sort_stack(&stack_a, &stack_b);
 	free_stack(&stack_a);
 	free_stack(&stack_b);

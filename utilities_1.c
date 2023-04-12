@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 17:31:43 by mhaileye          #+#    #+#             */
-/*   Updated: 2023/04/11 17:10:23 by codespace        ###   ########.fr       */
+/*   Updated: 2023/04/12 12:34:54 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	has_duplicate(struct t_Stack **stack)
 	itoa = ft_itoa((*stack)->num);
 	head = init_node(itoa);
 	if (!head && free_up(&itoa))
-		return (-1);
+		return (1);
 	last = head;
 	iterate = (*stack)->next;
 	while (iterate && free_up(&itoa))

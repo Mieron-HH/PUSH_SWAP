@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhaileye <mhaileye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 16:59:48 by mhaileye          #+#    #+#             */
-/*   Updated: 2023/04/10 20:45:47 by mhaileye         ###   ########.fr       */
+/*   Updated: 2023/04/12 12:46:50 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,14 @@ void	parse_moves(char *str, t_Stack **a, t_Stack **b)
 	if (!str && ft_printf("%E\n", "Error"))
 		return ;
 	moves = validate_moves(str);
-	if (moves == NULL && ft_printf("%E\n", "Error"))
-		return ;
-	perform_moves(moves, a, b);
+	if (moves == NULL)
+		ft_printf("%E\n", "Error");
+	else
+		perform_moves(moves, a, b);
+	free_stack(a);
+	free_stack(b);
+	free_array(moves);
+	free_up(&str);
 }
 
 char	**validate_moves(char *str)

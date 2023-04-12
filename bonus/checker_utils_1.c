@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker_utils_1.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhaileye <mhaileye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 21:35:19 by mhaileye          #+#    #+#             */
-/*   Updated: 2023/04/09 21:39:30 by mhaileye         ###   ########.fr       */
+/*   Updated: 2023/04/12 12:24:51 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,12 @@ int	extract_from_string(t_Stack **stack, char *s)
 	if (!node && free_stack(stack))
 		return (0);
 	if (*stack == NULL)
-	{
 		*stack = node;
-		return (1);
+	else
+	{
+		tail = get_tail(*stack);
+		tail->next = node;
 	}
-	tail = get_tail(*stack);
-	tail->next = node;
 	return (1);
 }
 
@@ -54,27 +54,28 @@ int	extract_from_string_array(t_Stack **stack, char *s)
 	t_Stack	*current;
 	t_Stack	*node;
 	char	**digits;
+	int		i;
 
+	i = -1;
 	current = get_tail(*stack);
 	digits = ft_split(s, ' ');
-	while (*digits)
+	while (++i < ft_arrlen(digits))
 	{
-		if (!validate_digit(*digits) && free_stack(stack))
+		if (!validate_digit(digits[i]) && free_stack(stack))
 			return (0);
-		node = init_node(*digits);
-		if (!node && free_stack(stack))
+		node = init_node(digits[i]);
+		if (!node && free_stack(stack) && free_array(digits))
 			return (0);
 		if (*stack == NULL)
 		{
 			*stack = node;
 			current = *stack;
-			digits++;
 			continue ;
 		}
 		current->next = node;
 		current = current->next;
-		digits++;
 	}
+	free_array(digits);
 	return (1);
 }
 
@@ -89,11 +90,12 @@ t_Stack	*extract_stack(char *s[], int start, int end)
 	{
 		if (ft_strnstr(s[start], " ", ft_strlen(s[start])))
 		{
-			if (!extract_from_string_array(&head, s[start]))
+			if (!extract_from_string_array(&head, s[start])
+				&& free_stack(&head))
 				return (NULL);
 			continue ;
 		}
-		if (!extract_from_string(&head, s[start]))
+		if (!extract_from_string(&head, s[start]) && free_stack(&head))
 			return (NULL);
 	}
 	return (head);

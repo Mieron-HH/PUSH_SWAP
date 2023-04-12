@@ -3,38 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   checker_utils_2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhaileye <mhaileye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 21:42:54 by mhaileye          #+#    #+#             */
-/*   Updated: 2023/04/10 20:42:24 by mhaileye         ###   ########.fr       */
+/*   Updated: 2023/04/12 12:32:41 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"checker.h"
 
-int	has_duplicate(struct t_Stack *stack)
+int	has_duplicate(struct t_Stack **stack)
 {
+	t_Stack	*iterate;
 	t_Stack	*tmp;
 	t_Stack	*head;
 	t_Stack	*last;
+	char		*itoa;
 
-	head = init_node(ft_itoa(stack->num));
-	if (!head)
-		return (-1);
+	itoa = ft_itoa((*stack)->num);
+	head = init_node(itoa);
+	if (!head && free_up(&itoa))
+		return (1);
 	last = head;
-	stack = stack->next;
-	while (stack)
+	iterate = (*stack)->next;
+	while (iterate && free_up(&itoa))
 	{
 		tmp = head;
-		while (tmp && tmp->num != stack->num)
+		while (tmp && tmp->num != iterate->num)
 			tmp = tmp->next;
-		if (tmp && tmp->num == stack->num)
-			return (free_stack(&head) * 0 + 1);
-		last->next = init_node(ft_itoa(stack->num));
+		if (tmp && tmp->num == iterate->num)
+			return (free_stack(&head) * free_stack(stack) * 0 + 1);
+		itoa = ft_itoa(iterate->num);
+		last->next = init_node(itoa);
 		last = last->next;
-		stack = stack->next;
+		iterate = iterate->next;
 	}
-	return (free_stack(&head) * 0);
+	return (free_stack(&head) * free_up(&itoa) * 0);
 }
 
 t_Stack	*get_tail(t_Stack *stack)

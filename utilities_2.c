@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 17:31:49 by mhaileye          #+#    #+#             */
-/*   Updated: 2023/04/11 17:44:19 by codespace        ###   ########.fr       */
+/*   Updated: 2023/04/12 11:43:53 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,8 @@ int	pre_atoi(char *s, int *num)
 int	compare_atoi(char *s, int num, int sign_found, int leading_os)
 {
 	char	*itoa;
-	int	l_os_found;
-	int	joined;
+	int		l_os_found;
+	int		joined;
 
 	l_os_found = 0;
 	joined = 0;
@@ -113,7 +113,8 @@ int	compare_atoi(char *s, int num, int sign_found, int leading_os)
 		joined = joined && free_up(&s);
 		return (1);
 	}
-	joined = joined && free_up(&s);
-	free_up((void *) itoa);
+	if (joined)
+		free_up(&s);
+	free_up(&itoa);
 	return (0);
 }

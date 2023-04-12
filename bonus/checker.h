@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhaileye <mhaileye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 21:31:22 by mhaileye          #+#    #+#             */
-/*   Updated: 2023/04/10 22:28:19 by mhaileye         ###   ########.fr       */
+/*   Updated: 2023/04/12 12:48:40 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct t_Stack
 	struct t_Stack	*next;
 }	t_Stack;
 
+int			is_stack_valid(t_Stack **stack, int argc, char **argv);
 int			validate_input(char *s[], int size);
 t_Stack		*extract_stack(char *s[], int start, int end);
 t_Stack		*init_node(char *s);
@@ -48,7 +49,7 @@ int			rotate_all(t_Stack **a, t_Stack **b, int print);
 int			swap_all(t_Stack **a, t_Stack **b, int print);
 
 int			is_sorted(t_Stack *stack, int order);
-int			has_duplicate(struct t_Stack *stack);
+int			has_duplicate(t_Stack **stack);
 int			pre_atoi(char *s, int *num);
 int			compare_atoi(char *s, int num, int sign_found, int leading_os);
 t_Stack		*get_tail(t_Stack *stack);
@@ -59,7 +60,9 @@ int			are_moves_valid(char **moves);
 void		perform_moves(char **moves, t_Stack **a, t_Stack **b);
 int			first_set_of_moves(char *move, t_Stack **a, t_Stack **b);
 int			second_set_of_moves(char *move, t_Stack **a, t_Stack **b);
+
+int			free_array(char **arry);
 int			free_stack(t_Stack **stack);
-void		print_stack(t_Stack *stack);
+int			ft_arrlen(char **str);
 
 #endif
