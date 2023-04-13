@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 17:30:14 by mhaileye          #+#    #+#             */
-/*   Updated: 2023/04/11 17:04:46 by codespace        ###   ########.fr       */
+/*   Updated: 2023/04/13 16:13:05 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	extract_from_string_array(t_Stack **stack, char *s)
 	while (++i < ft_arrlen(digits))
 	{
 		if (!validate_digit(digits[i]) && free_stack(stack))
-			return (0);
+			return (free_array(digits) * 0);
 		node = init_node(digits[i]);
 		if (!node && free_stack(stack) && free_array(digits))
 			return (0);
@@ -128,7 +128,10 @@ int	free_array(char **arry)
 
 	len = ft_arrlen(arry);
 	if (len == 0)
-		return (1);
+	{
+		free(arry);
+		return (0);
+	}
 	i = -1;
 	while (++i < len)
 		free_up(&(arry[i]));

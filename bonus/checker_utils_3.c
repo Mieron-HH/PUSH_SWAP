@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 22:03:13 by mhaileye          #+#    #+#             */
-/*   Updated: 2023/04/12 12:12:24 by codespace        ###   ########.fr       */
+/*   Updated: 2023/04/13 16:14:30 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ int	compare_atoi(char *s, int num, int sign_found, int leading_os)
 	while (--leading_os > 0)
 		s++;
 	if (ft_strlen(s) == 0 && l_os_found && ++joined)
-		s = ft_strjoin("\0", "0");
+		s = ft_strjoin("\0", "0", 0);
 	else if (sign_found && ++joined)
-		s = ft_strjoin("-", s);
+		s = ft_strjoin("-", s, 0);
 	itoa = ft_itoa(num);
 	if (s && ft_strncmp(itoa, s, ft_strlen(s)) == 0 && free_up(&itoa))
 	{
@@ -100,10 +100,14 @@ int	free_array(char **arry)
 
 	len = ft_arrlen(arry);
 	if (len == 0)
-		return (1);
+	{
+		free(arry);
+		return (0);
+	}
 	i = -1;
 	while (++i < len)
 		free_up(&(arry[i]));
 	free(arry);
 	return (1);
 }
+

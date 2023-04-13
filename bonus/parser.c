@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 16:59:48 by mhaileye          #+#    #+#             */
-/*   Updated: 2023/04/12 12:46:50 by codespace        ###   ########.fr       */
+/*   Updated: 2023/04/13 12:28:22 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	parse_moves(char *str, t_Stack **a, t_Stack **b)
 	free_stack(a);
 	free_stack(b);
 	free_array(moves);
-	free_up(&str);
 }
 
 char	**validate_moves(char *str)
@@ -44,9 +43,10 @@ char	**validate_moves(char *str)
 			str[i] = ' ';
 	}
 	moves = ft_split(str, ' ');
+	free_up(&str);
 	if (moves == NULL)
 		return (NULL);
-	if (!are_moves_valid(moves))
+	if (!are_moves_valid(moves) && free_array(moves))
 		return (NULL);
 	return (moves);
 }
@@ -56,23 +56,23 @@ int	are_moves_valid(char **moves)
 	moves--;
 	while (*(++moves))
 	{
-		if (ft_strncmp(*moves, "sa", 2) == 0
-			|| ft_strncmp(*moves, "sb", 2) == 0)
+		if (ft_strncmp(*moves, "sa", (int) ft_strlen(*moves)) == 0
+			|| ft_strncmp(*moves, "sb", (int) ft_strlen(*moves)) == 0)
 			continue ;
-		if (ft_strncmp(*moves, "ss", 2) == 0)
+		if (ft_strncmp(*moves, "ss", (int) ft_strlen(*moves)) == 0)
 			continue ;
-		if (ft_strncmp(*moves, "ra", 2) == 0
-			|| ft_strncmp(*moves, "rb", 2) == 0)
+		if (ft_strncmp(*moves, "ra", (int) ft_strlen(*moves)) == 0
+			|| ft_strncmp(*moves, "rb", (int) ft_strlen(*moves)) == 0)
 			continue ;
-		if (ft_strncmp(*moves, "rr", 2) == 0)
+		if (ft_strncmp(*moves, "rr", (int) ft_strlen(*moves)) == 0)
 			continue ;
-		if (ft_strncmp(*moves, "pa", 2) == 0
-			|| ft_strncmp(*moves, "pb", 2) == 0)
+		if (ft_strncmp(*moves, "pa", (int) ft_strlen(*moves)) == 0
+			|| ft_strncmp(*moves, "pb", (int) ft_strlen(*moves)) == 0)
 			continue ;
-		if (ft_strncmp(*moves, "rra", 3) == 0
-			|| ft_strncmp(*moves, "rrb", 3) == 0)
+		if (ft_strncmp(*moves, "rra", (int) ft_strlen(*moves)) == 0
+			|| ft_strncmp(*moves, "rrb", (int) ft_strlen(*moves)) == 0)
 			continue ;
-		if (ft_strncmp(*moves, "rrr", 3) == 0)
+		if (ft_strncmp(*moves, "rrr", (int) ft_strlen(*moves)) == 0)
 			continue ;
 		return (0);
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhaileye <mhaileye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 20:01:43 by mhaileye          #+#    #+#             */
-/*   Updated: 2023/04/10 17:13:08 by mhaileye         ###   ########.fr       */
+/*   Updated: 2023/04/13 12:15:45 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,27 +25,30 @@ int	ft_find_char(char c, char const *set)
 	return (0);
 }
 
-char	*ft_strtrim(char const *s1, char const *set)
+char	*ft_strtrim(char *str, char const *set)
 {
 	char	*result;
 	size_t	start;
 	size_t	len;
 	size_t	i;
 
-	if (s1 == NULL)
+	if (str == NULL)
 		return (NULL);
-	len = ft_strlen(s1);
+	len = ft_strlen(str);
 	start = 0;
-	while ((start < len) && ft_find_char(s1[start], set) == 1)
+	while ((start < len) && ft_find_char(str[start], set) == 1)
 		start++;
-	while (len > start && ft_find_char(s1[len - 1], set) == 1)
+	while (len > start && ft_find_char(str[len - 1], set) == 1)
 		len--;
 	result = malloc((len - start + 1) * sizeof(char));
 	if (result == NULL)
+	{
+		free(str);
 		return (NULL);
+	}
 	i = 0;
 	while (start < len)
-		result[i++] = s1[start++];
+		result[i++] = str[start++];
 	result[i] = '\0';
 	return (result);
 }
