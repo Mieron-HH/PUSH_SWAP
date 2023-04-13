@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 17:31:49 by mhaileye          #+#    #+#             */
-/*   Updated: 2023/04/12 11:43:53 by codespace        ###   ########.fr       */
+/*   Updated: 2023/04/13 16:45:48 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,13 +108,9 @@ int	compare_atoi(char *s, int num, int sign_found, int leading_os)
 	else if (sign_found && ++joined)
 		s = ft_strjoin("-", s);
 	itoa = ft_itoa(num);
-	if (s && ft_strncmp(itoa, s, ft_strlen(s)) == 0 && free_up(&itoa))
-	{
-		joined = joined && free_up(&s);
-		return (1);
-	}
-	if (joined)
-		free_up(&s);
+	if (s && ft_strncmp(itoa, s, ft_strlen(s)) == 0 && check_leak(s, joined))
+		return (free_up(&itoa));
+	check_leak(s, joined);
 	free_up(&itoa);
 	return (0);
 }

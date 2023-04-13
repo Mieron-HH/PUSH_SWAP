@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 21:42:54 by mhaileye          #+#    #+#             */
-/*   Updated: 2023/04/12 12:32:41 by codespace        ###   ########.fr       */
+/*   Updated: 2023/04/13 16:47:19 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,20 +63,6 @@ int	get_size(t_Stack *stack)
 	return (len);
 }
 
-void	print_stack(t_Stack *stack)
-{
-	if (stack != NULL)
-	{
-		ft_printf("|||   ");
-		while (stack)
-		{
-			ft_printf("%d   ", stack->num);
-			stack = stack->next;
-		}
-		ft_printf("|||\n");
-	}
-}
-
 int	free_stack(t_Stack **stack)
 {
 	t_Stack	*tmp;
@@ -87,5 +73,12 @@ int	free_stack(t_Stack **stack)
 		free(*stack);
 		*stack = tmp;
 	}
+	return (1);
+}
+
+int	check_leak(char *str, int do_free)
+{
+	if (do_free)
+		free_up(&str);
 	return (1);
 }

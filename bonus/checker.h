@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 21:31:22 by mhaileye          #+#    #+#             */
-/*   Updated: 2023/04/13 15:31:27 by codespace        ###   ########.fr       */
+/*   Updated: 2023/04/13 16:36:28 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,6 @@ int			second_set_of_moves(char *move, t_Stack **a, t_Stack **b);
 int			free_array(char **arry);
 int			free_stack(t_Stack **stack);
 int			ft_arrlen(char **str);
-void		print_stack(t_Stack *stack);
+int			check_leak(char *str, int do_free);
 
 #endif

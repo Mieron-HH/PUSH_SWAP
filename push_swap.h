@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 17:30:22 by mhaileye          #+#    #+#             */
-/*   Updated: 2023/04/11 17:07:23 by codespace        ###   ########.fr       */
+/*   Updated: 2023/04/13 16:46:38 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int			is_sorted(t_Stack *stack, int order);
 int			has_duplicate(t_Stack **stack);
 int			pre_atoi(char *s, int *num);
 
-void		print_stack(t_Stack *stack);
+int			check_leak(char *str, int do_free);
 void		sort_stack(t_Stack **a, t_Stack **b);
 int			free_stack(t_Stack **stack);
 
@@ -73,14 +73,13 @@ t_Stack		*get_tail(t_Stack *stack);
 int			get_size(t_Stack *stack);
 
 void		reset_position(t_Stack **stack);
+void		shift_stack(t_Stack **stack);
 void		assign_target_position(t_Stack **a, t_Stack **b);
 int			locate_target(t_Stack **a, int b_index, int t_pos, int t_index);
 void		calculate_all_cost(t_Stack **a, t_Stack **b);
 void		calculate_lowest_cost(t_Stack **a, t_Stack **b);
 void		move_lowest_cost(t_Stack **a, t_Stack **b, int cost_a, int cost_b);
 void		check_cost_to_rotate(t_Stack **stack, char stck, int cost);
-
-void		shift_stack(t_Stack **stack);
 int			get_lowest_index_pos(t_Stack **stack);
 
 #endif
