@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 21:26:37 by mhaileye          #+#    #+#             */
-/*   Updated: 2023/04/13 12:36:56 by codespace        ###   ########.fr       */
+/*   Updated: 2023/04/17 10:12:06 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int	main(int argc, char **argv)
 		moves = ft_strjoin(moves, line, 1);
 		free_up(&line);
 	}
+	if (is_sorted(stack_a, 1) && moves == NULL && free_stack(&stack_a))
+		return (ft_printf("OK\n") * 0);
 	parse_moves(moves, &stack_a, &stack_b);
 	free_up(&moves);
 	return (1);
